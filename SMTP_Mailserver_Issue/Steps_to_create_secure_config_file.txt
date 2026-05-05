@@ -1,0 +1,27 @@
+# 1. SSH to the pipewayweb server
+ssh pipewayweb@<server_ip>
+
+# 2. Create the config file
+sudo nano /var/www/html/cron/SMTP_Email_Tester_KNT_Config.conf
+
+# 3. Add this content (paste the password):
+# ============================================================================
+# SMTP Configuration File
+# ============================================================================
+# SECURITY WARNING: This file contains sensitive credentials.
+# Permissions should be set to 600 (chmod 600)
+# Only the owner should have read/write access.
+# ============================================================================
+
+SMTP_PASSWORD="COFFEE@lines.021326"
+
+# 4. Save and exit (Ctrl+O, Enter, Ctrl+X)
+
+# 5. Set secure permissions (owner read/write only)
+sudo chmod 600 /var/www/html/cron/SMTP_Email_Tester_KNT_Config.conf
+
+# 6. Set ownership to the user running the script
+sudo chown pipewayweb:pipewayweb /var/www/html/cron/SMTP_Email_Tester_KNT_Config.conf
+
+# 7. Verify permissions
+ls -la /var/www/html/cron/SMTP_Email_Tester_KNT_Config.conf

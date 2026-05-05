@@ -1,0 +1,10 @@
+ACCA	Schedule Batch Report - View Scheduled Report	https://pipeway.aacanet.org/bi/dist/Report/ViewReport
+	Schedule Batch Report - Scheduler Logs	https://pipeway.aacanet.org/bi/dist/Report/schedularlogs
+	Document Transfer - My Downloads	https://pipeway.aacanet.org/bi/dist/mydownload
+	Document Transfer - Company Upload and Download	https://pipeway.aacanet.org/bi/dist/uploaddownloadlog
+	Administration - Document Request Log	https://pipeway.aacanet.org/bi/dist/MediaManagement/docreqlog
+	Administration - Manage FAQ	https://pipeway.aacanet.org/bi/dist/FAQ/viewFaq
+	Administration - Manage Notice	https://pipeway.aacanet.org/bi/dist/NOTICE/viewNotice
+
+    -- need to provide these to ishaan. vishal will provide this.
+    

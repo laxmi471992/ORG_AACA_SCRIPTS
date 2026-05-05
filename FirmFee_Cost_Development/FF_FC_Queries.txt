@@ -1,0 +1,65 @@
+-- Firm Cost  query to get distinct client codes
+$query = "SELECT DISTINCT PYALORGCD
+			from RMAACABHS
+			WHERE RMSTRANCDE='1A'
+			AND CAST(DTPRLT AS DATE) >= '" . $queryDate . "'
+			AND VENDORNUM IN ('" . $companyName . "') group by PYALORGCD ORDER BY  PYALORGCD";
+
+-- Query to make report Firm cost 
+
+$query = "WITH FIRMCOSTFEE AS (
+					select BLAAINNM, LEFT(BLAAINNM, 1) as TYPERT, CUROFFCRCD AS 'Client_Code', VENDORNUM AS 'Firm',
+					RMSACCTNUM AS 'Acct_Number',RMSCORPNM1 AS 'Last_Name', RMSCORPNM2 AS 'First_Name',
+					RMSTRANCDE AS 'TR_CD', RMSTRANDTE AS 'Transaction_Date', RMSTRANDSC AS 'Transaction_Description',
+					IF (RMSTRANCDE = '1A' , INVCLIENT , 0.00) AS 'Cost_Amount', COLLAM AS 'Payment_Amount', DUECLIENT AS 'Remit_Amount',
+					FEESFR AS 'Fee_Requested_by_Firm', FEES AS 'Fee_Paid_to_Firm', INVOICENO AS 'Firm_Invoice_No',
+					CHECKNO AS 'Firm_Check_Number', BLPYFRCK AS 'AACA_Check_Number',BLPYFRTO AS 'Amount_Paid_to_Firm',
+					DTPRLT AS 'AACA_Check_Date', RMSFILENUM, PYALORGCD, PAIDDATE  AS 'Firm_Invoice_Date'
+					from RMAACABHS
+					WHERE RMSTRANCDE='1A'
+					AND CAST(DTPRLT AS DATE)  >= '" . $queryDate . "'
+					AND VENDORNUM ='" . $companyName . "' AND PYALORGCD='" . $result['PYALORGCD'] . "')SELECT Client_Code as 'Client Code', Acct_Number as 'Acct No.', Last_Name as 'Last Name ', First_Name as 'First Name',
+					TR_CD as 'TR CD', Transaction_Date as 'Transaction Date', Transaction_Description as 'Transaction Description',
+					Payment_Amount AS 'Payment Amount' ,Remit_Amount AS 'Remit Amount',
+					Fee_Requested_by_Firm AS 'Fee Requested By Firm',
+					Fee_Paid_to_Firm as 'Fee Paid To Firm',Firm_Invoice_No as 'Firm Invoice No', Firm_Check_Number as 'Firm Check Number',
+					Amount_Paid_to_Firm as 'Amount Paid To Firm' ,
+					Firm_Invoice_Date as 'Firm Invoice Date', P.FILELOCATN AS 'Firm File No',PYALORGCD
+					from FIRMCOSTFEE
+					left join RMSPMASTER AS P
+					ON FIRMCOSTFEE.RMSFILENUM = P.RMSFILENUM
+					ORDER BY  PYALORGCD,Client_Code,Firm_Invoice_Date, Firm_Invoice_No";
+		
+-- Firm fee to get distinct client codes.
+
+	$query = "SELECT DISTINCT PYALORGCD
+			from RMAACABHS
+			WHERE RMSTRANCDE >= '50' AND RMSTRANCDE <= '59' 
+			AND CAST(DTPRLT AS DATE) >= '" . $queryDate . "'
+			AND VENDORNUM IN ('" . $companyName . "') group by PYALORGCD ORDER BY  PYALORGCD";
+
+-- Firm fee report 
+
+		$query = "WITH FIRMCOSTFEE AS (
+					select BLAAINNM, LEFT(BLAAINNM, 1) as TYPERT, CUROFFCRCD AS 'Client_Code',VENDORNUM as 'Firm',
+					RMSACCTNUM AS 'Acct_Number',RMSCORPNM1 AS 'Last_Name', RMSCORPNM2 AS 'First_Name',
+					RMSTRANCDE AS 'TR_CD', RMSTRANDTE as  'Transaction_Date', RMSTRANDSC AS 'Transaction_Description',
+					IF (RMSTRANCDE = '1A' , INVCLIENT , 0.00) AS 'Cost_Amount', COLLAM AS 'Payment_Amount', DUECLIENT AS 'Remit_Amount',
+					FEESFR AS 'Fee_Requested_by_Firm', FEES AS 'Fee_Paid_to_Firm', INVOICENO AS 'Firm_Invoice_No',
+					CHECKNO AS 'Firm_Check_Number', BLPYFRCK AS 'AACA_Check_Number',
+					IF (RMSTRANCDE = '51' , (BLPYFRTO - (0 - DUECLIENT)) , (BLPYFRTO - ( COLLAM - DUECLIENT ))) AS 'Amount_Paid_to_Firm',
+					DTPRLT AS 'AACA_Check_Date', RMSFILENUM, PYALORGCD, PAIDDATE  AS 'Firm_Invoice_Date'
+					from RMAACABHS
+					WHERE RMSTRANCDE >= '50' AND RMSTRANCDE <= '59' 
+					AND CAST(DTPRLT AS DATE) >= '" . $queryDate . "'
+					AND VENDORNUM ='" . $companyName . "' AND PYALORGCD='" . $result['PYALORGCD'] . "')SELECT Client_Code as 'Client Code', Acct_Number as 'Acct No.', Last_Name as 'Last Name ', First_Name as 'First Name',
+					TR_CD as 'TR CD', Transaction_Date as 'Transaction Date', Transaction_Description as 'Transaction Description',
+					Payment_Amount AS 'Payment Amount' ,Remit_Amount AS 'Remit Amount',
+					Fee_Requested_by_Firm AS 'Fee Requested By Firm',
+					Fee_Paid_to_Firm as 'Fee Paid To Firm',Firm_Invoice_No as 'Firm Invoice No', Firm_Check_Number as 'Firm Check Number',
+					Amount_Paid_to_Firm as 'Amount Paid To Firm' ,
+					Firm_Invoice_Date as 'Firm Invoice Date', P.FILELOCATN AS 'Firm File No',PYALORGCD
+					from FIRMCOSTFEE
+					left join RMSPMASTER AS P
+					ON FIRMCOSTFEE.RMSFILENUM = P.RMSFILENUM
+					ORDER BY  PYALORGCD,Client_Code,Firm_Invoice_Date, Firm_Invoice_No";

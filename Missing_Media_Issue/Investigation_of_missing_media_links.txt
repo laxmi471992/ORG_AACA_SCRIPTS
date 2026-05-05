@@ -1,0 +1,18 @@
+-- URL 1
+
+https://pipeway.aacanet.org/bi/dist/Report/downloadfile?
+nama=98035172_CONT_00000000_D07E5A96-0000-CF19-B944-141FAE52850E_20250425.PDF
+&&remote=%2F%2FBAY%2Fjudmedia%2F98035172_CONT_00000000_D07E5A96-0000-CF19-B944-141FAE52850E_20250425.PDF
+
+-- URL 2 
+
+https://pipeway.aacanet.org/bi/dist/Report/downloadfile?
+nama=98035172_CONT_00000000_D07E5A96-0000-CF19-B944-141FAE52850E_20250425.PDF
+&&remote=%2F%2FBAY%2Fjudmedia%2F98035172_CONT_00000000_D07E5A96-0000-CF19-B944-141FAE52850E_20250425.PDF
+
+
+-- check if this file is being sent from IBMi. and where its is being used in pipeway.
+
+AACAIMAGEX file.?
+WFAACAIMAGE File
+

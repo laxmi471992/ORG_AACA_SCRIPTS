@@ -1,0 +1,10 @@
+-- there are two scripts in question. 
+downloadfile.php
+document_loading.sh
+
+-- took backup in git under notepads 
+
+-- started modifying the code with _KNT label
+-- new scripts name 
+downloadfile_KNT.php
+document_loading_KNT.sh
